@@ -1,0 +1,32 @@
+{
+    "name": "requorm.js",
+    "version": "0.0.1",
+    "description": "JS library for validating required fields on HTML forms",
+    "main": "requorm.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/asaskevich/requorm.js.git"
+    },
+    "keywords": [
+        "JS",
+        "forms",
+        "validate",
+        "required",
+        "input",
+        "checker"
+    ],
+    "author": "Alex Saskevich",
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://github.com/asaskevich/requorm.js/raw/master/LICENSE"
+        }
+    ],
+    "bugs": {
+        "url": "https://github.com/asaskevich/requorm.js/issues"
+    },
+    "homepage": "https://github.com/asaskevich/requorm.js"
+}

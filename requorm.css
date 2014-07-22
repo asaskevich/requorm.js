@@ -1,0 +1,15 @@
+.valid-input {
+    border: 2px solid #9ca3da;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: 0 0 10px #1bed2b;
+    font-size: 16px;
+}
+
+.invalid-input {
+    border: 2px solid #9ca3da;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: 0 0 10px #ed0b13;
+    font-size: 16px;
+}

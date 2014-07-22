@@ -1,0 +1,26 @@
+{
+  "name": "requorm.js",
+  "main": "requorm.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/asaskevich/requorm.js",
+  "authors": [
+    "Alex Saskevich <alexhomel@ya.ru>"
+  ],
+  "description": "JS library for validating HTML forms",
+  "keywords": [
+    "JS",
+    "validate",
+    "check",
+    "forms",
+    "requorm",
+    "required"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
