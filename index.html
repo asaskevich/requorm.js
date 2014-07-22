@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Requorm.js by asaskevich</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Requorm.js</h1>
+        <p>JavaScript library for checking and validating HTML forms </p>
+
+        <p class="view"><a href="https://github.com/asaskevich/requorm.js">View the Project on GitHub <small>asaskevich/requorm.js</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/asaskevich/requorm.js/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/asaskevich/requorm.js/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/asaskevich/requorm.js">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="requormjs" class="anchor" href="#requormjs"><span class="octicon octicon-link"></span></a>requorm.js</h1>
+
+<p>JavaScript library for checking and validating HTML forms. If any of the fields in the form incorrectly filled, submit buttons will be disabled.</p>
+
+<h4>
+<a name="content" class="anchor" href="#content"><span class="octicon octicon-link"></span></a>Content</h4>
+
+<ul>
+<li><a href="#Examples">Examples</a></li>
+<li><a href="#Usage">Usage</a></li>
+<li><a href="#Addition%20checkers_to_DOM_element">Addition checkers to DOM element</a></li>
+<li><a href="#Default_checkers">Default checkers</a></li>
+<li><a href="#Addition_own_checkers">Addition own checkers</a></li>
+<li><a href="#Using_CSS">Using CSS</a></li>
+</ul><h4>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h4>
+
+<p>Let's watch some examples!</p>
+
+<h4>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h4>
+
+<p>Okay, examples are pretty, but what about usage? First of all, include <code>requorm.js</code> (or minified <code>requorm.min.js</code>) to your HTML file:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    ...
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"requorm.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"requorm.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+</pre></div>
+
+<p>Create any form with some class name:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"myform"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Name"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Email"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"Submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+
+<p>Init library, init default checkers and(or) add own checkers and apply to our form with class name "myform":</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script&gt;</span>
+    <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">requorm</span><span class="p">()</span>
+    <span class="nx">r</span><span class="p">.</span><span class="nx">initDefCheckers</span><span class="p">()</span>
+    <span class="nx">r</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="s2">".myform"</span><span class="p">)</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h4>
+<a name="addition-checkers-to-dom-element" class="anchor" href="#addition-checkers-to-dom-element"><span class="octicon octicon-link"></span></a>Addition checkers to DOM element</h4>
+
+<p>Library use attribure <code>checkers</code> for following tags:</p>
+
+<ul>
+<li><code>input</code></li>
+<li><code>textarea</code></li>
+<li><code>select</code></li>
+</ul><p>For example:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"notEmpty"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>If the attribute is not specified, element will be ignored. One element can have multiple checkers:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"notEmpty; email()"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>Checkers in attribute are separated by semicolon. If checker recieve any const arguments, you can point them like this:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"minlenght(8); maxlength(32);"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"lenght(8, 32)"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"equal(abacaba)"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>Note, that list of arguments <code>10, 1.0f, true, abc abc</code> will be parsed as array of strings: <code>["10", "1.0f", "true", "abc abc"]</code></p>
+
+<h4>
+<a name="default-checkers" class="anchor" href="#default-checkers"><span class="octicon octicon-link"></span></a>Default checkers</h4>
+
+<ul>
+<li>
+<strong>notEmpty</strong> - check, that field has any input</li>
+<li>
+<strong>minLength(min)</strong> - check, that field input has length greater or equal to <code>min</code>
+</li>
+<li>
+<strong>maxLength(max)</strong> - check, that field input has length less or equal to <code>max</code>
+</li>
+<li>
+<strong>equal(input)</strong> - check, that field input is equal to <code>input</code>
+</li>
+<li>
+<strong>alpha</strong> - check, that field input has only alphabetic characters</li>
+<li>
+<strong>numeric</strong> - check, that field input has only numeric characters</li>
+<li>
+<strong>email</strong> - check, that field input has valid e-mail form</li>
+</ul><h4>
+<a name="addition-own-checkers" class="anchor" href="#addition-own-checkers"><span class="octicon octicon-link"></span></a>Addition own checkers</h4>
+
+<p>For creating new checker, call <code>requorm.addChecker(name, func)</code>, where <code>name</code> is name of checker and <code>func</code> is function, that take DOM element and array of arguments and return <code>true|false</code>. Following code create new checker with name <code>equal</code>:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">requorm</span><span class="p">()</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">addChecker</span><span class="p">(</span><span class="s2">"equal"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">value</span> <span class="o">==</span> <span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>After it you can use checker in html:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"equal(abacaba)"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<h4>
+<a name="using-css" class="anchor" href="#using-css"><span class="octicon octicon-link"></span></a>Using CSS</h4>
+
+<p>If you want to mark invalid and valid fields, create in your CSS file following selectors:</p>
+
+<ul>
+<li><code>.invalid-input</code></li>
+<li><code>.valid-input</code></li>
+</ul><h4>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h4>
+
+<ul>
+<li>More checkers</li>
+<li>Unit tests</li>
+<li>Documentation</li>
+<li>Pretty argument parser</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/asaskevich">asaskevich</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
