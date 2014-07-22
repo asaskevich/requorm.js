@@ -28,5 +28,6 @@
     "bugs": {
         "url": "https://github.com/asaskevich/requorm.js/issues"
     },
-    "homepage": "https://github.com/asaskevich/requorm.js"
+    "homepage": "https://github.com/asaskevich/requorm.js",
+    "categories": ["Utilities", "Validation"]
 }
