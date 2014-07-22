@@ -11,6 +11,10 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+
+    <link rel="stylesheet" type="text/css" href="requorm.css">
+    <script src="requorm.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -47,11 +51,101 @@
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h4>
 
 <p>Let's watch some examples!</p>
+<!-- Example 1 -->
+<div class="code">
+<p><b>Example 1: </b>Input should be not empty</p>
+<p>
+<form class="ex-1">
+<input type="text" checkers="notEmpty">
+<input type="submit" class="button" value="Submit">
+</form>
+</p>
+<p>Type any text in input field and you will see green border on it! Also you will see enabled button!</p>
+<p><code>Used checkers: <b>notEmpty</b></code></p>
+</div>
+
+<!-- Example 2 -->
+<div class="code">
+<p><b>Example 2: </b>Input length should be between six and ten</p>
+<p>
+<form class="ex-2">
+<input type="text" checkers="minLength(6);maxLength(10)">
+<input type="submit" class="button" value="Submit">
+</form>
+</p>
+<p>Type any text with length in range [6..10] and you will see green border on it! Also you will see enabled button!</p>
+<p><code>Used checkers: <b>minLength(6); maxLength(10)</b></code></p>
+</div>
+
+<!-- Example 3 -->
+<div class="code">
+<p><b>Example 3: </b>Input should be alphabetic in one case and numeric in second</p>
+<p>
+<form class="ex-3">
+<input type="text" checkers="alpha">
+<input type="text" checkers="numeric">
+<input type="submit" class="button" value="Submit">
+</form>
+</p>
+<p>Type any letter in first field and any numeric character in second field and you will see green border on it! Also you will see enabled button!</p>
+<p><code>Used checkers: <b>alpha; numeric</b></code></p>
+</div>
+
+<!-- Example 4 -->
+<div class="code">
+<p><b>Example 4: </b>Input should be valid e-mail with minimal length ten characters</p>
+<p>
+<form class="ex-4">
+<input type="text" checkers="email;minLength(10)">
+<input type="submit" class="button" value="Submit">
+</form>
+</p>
+<p>Type <code><b>username@domain.com</b></code> and you will see green border on it! Also you will see enabled button!</p>
+<p><code>Used checkers: <b>email; minLength(10)</b></code></p>
+</div>
+
+<!-- Example 5 -->
+<div class="code">
+<p><b>Example 5: </b>Input should be equal to "Hello"</p>
+<p>
+<form class="ex-5">
+<input type="text" checkers="equal(Hello)">
+<input type="submit" class="button" value="Submit">
+</form>
+</p>
+<p>Type <code><b>Hello</b></code> and you will see green border on it! Also you will see enabled button!</p>
+<p><code>Used checkers: <b>equal(Hello)</b></code></p>
+<p><b>Spaces, the quotes are not yet supported!</b></p>
+</div>
+
+<!-- Example 6 -->
+<div class="code">
+<p><b>Example 6: </b>Input should start with "Ex" in one case and has five lines in second<b>(Custom checkers)</b></p>
+<p>
+<form class="ex-6">
+<input type="text" checkers="startWith(Ex)" style="width:100%"><br>
+<textarea checkers="lineCount(5)" rows="6" style="width:99%"></textarea><br>
+<input type="submit" class="button" value="Submit">
+</form>
+</p>
+<p>Type <code><b>Example</b> or <b>Excellent</b> or any string with prefix <b>Ex</b></code> in input field and any multiline text(but with five lines) in textarea and you will see green border on it! Also you will see enabled button!</p>
+<p><code>Used checkers: <b>startWith(Ex); lineCount(5)</b></code></p>
+<p>
+<pre class="highlight highlight-html">
+r.addChecker(<span class="s2">"startWith"</span>, <span class="kd">function</span>(element, args) {
+ <span class="k">return</span> element.value.indexOf(args[<span class="mi">0</span>]) == <span class="mi">0</span>
+})
+r.addChecker(<span class="s2">"lineCount"</span>, <span class="kd">function</span>(element, args) {
+ <span class="k">return</span> element.value.split(<span class="s2">"\n"</span>).length == parseInt(args[<span class="mi">0</span>])
+})
+</pre>
+</p>
+</div>
 
 <h4>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h4>
 
-<p>Okay, examples are pretty, but what about usage? First of all, include <code>requorm.js</code> (or minified <code>requorm.min.js</code>) to your HTML file:</p>
+<p>Okay, examples are awesome, but what about usage? First of all, include <code>requorm.js</code> (or minified <code>requorm.min.js</code>) to your HTML file:</p>
 
 <div class="highlight highlight-html"><pre><span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -147,11 +241,13 @@
 <h4>
 <a name="using-css" class="anchor" href="#using-css"><span class="octicon octicon-link"></span></a>Using CSS</h4>
 
-<p>If you want to mark invalid and valid fields, create in your CSS file following selectors:</p>
+<p>If you want to mark invalid and valid fields visually, use in your CSS file following selectors:</p>
 
 <ul>
 <li><code>.invalid-input</code></li>
 <li><code>.valid-input</code></li>
+<li><code>.button[disabled]</code></li>
+<li><code>.button</code></li>
 </ul><h4>
 <a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h4>
 
@@ -160,6 +256,8 @@
 <li>Unit tests</li>
 <li>Documentation</li>
 <li>Pretty argument parser</li>
+<li>Tooltips</li>
+<li>Your ideas?</li>
 </ul>
       </section>
       <footer>
@@ -168,6 +266,21 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script type="text/javascript">
+    var r = new requorm();
+    r.initDefCheckers();
+    r.addChecker("startWith", function(element, args) {
+    	return element.value.indexOf(args[0]) == 0
+    })
+    r.addChecker("lineCount", function(element, args) {
+    	return element.value.split("\n").length == parseInt(args[0])
+    })
+    r.apply(".ex-1");
+    r.apply(".ex-2");
+    r.apply(".ex-3");
+    r.apply(".ex-4");
+    r.apply(".ex-5");
+    r.apply(".ex-6");
+    </script>
   </body>
 </html>
