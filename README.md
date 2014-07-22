@@ -54,8 +54,8 @@ Note, that list of arguments `10, 1.0f, true, abc abc` will be parsed as array o
 
 #### Default checkers
 - **notEmpty** - check, that field has any input
-- **minlength(min)** - check, that field input has length greater or equal to `min`
-- **maxlength(max)** - check, that field input has length less or equal to `max`
+- **minLength(min)** - check, that field input has length greater or equal to `min`
+- **maxLength(max)** - check, that field input has length less or equal to `max`
 - **equal(input)** - check, that field input is equal to `input`
 - **alpha** - check, that field input has only alphabetic characters
 - **numeric** - check, that field input has only numeric characters
@@ -73,6 +73,11 @@ After it you can use checker in html:
 ```html
 <input type="text" checkers="equal(abacaba)">
 ```
+
+#### Using CSS
+If you want to mark invalid and valid fields, create in your CSS file following selectors:
+* `.invalid-input`
+* `.valid-input`
 
 #### TODO
 * More checkers
