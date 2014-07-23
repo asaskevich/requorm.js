@@ -3,8 +3,25 @@ requorm.js
 
 JavaScript library for checking and validating HTML forms. If any of the fields in the form incorrectly filled, submit buttons will be disabled.
 
+#### Content
+* [Examples](#examples)
+* [Installation](#install)
+* [Usage](#usage)
+* [Addition checkers to DOM element](#addition-checkers-to-dom-element)
+* [Default checkers](#default-checkers)
+* [Addition own checkers](#addition-own-checkers)
+* [Using CSS](#using-css)
+* [Contribution](#contribution)
+
 #### Examples
 Watch examples [here](http://asaskevich.github.io/requorm.js)
+
+#### Installation
+You can download library directly from GitHub. Alternatively, you can use **npm** or **bower**:
+```shell
+$ npm install requorm.js
+$ bower install requorm.js
+```
 
 #### Usage
 First of all, include `requorm.js` (or minified `requorm.min.js`) to your HTML file:
@@ -49,8 +66,8 @@ If the attribute is not specified, element will be ignored. One element can have
 ```
 Checkers in attribute are separated by semicolon. If checker recieve any const arguments, you can point them like this:
 ```html
-<input type="text" checkers="minlenght(8); maxlength(32);">
-<input type="text" checkers="lenght(8, 32)">
+<input type="text" checkers="minLength(8); maxLength(32);">
+<input type="text" checkers="length(8, 32)">
 <input type="text" checkers="equal(abacaba)">
 ```
 Note, that list of arguments `10, 1.0f, true, abc abc` will be parsed as array of strings: `["10", "1.0f", "true", "abc abc"]`
@@ -78,12 +95,19 @@ After it you can use checker in html:
 ```
 
 #### Using CSS
-If you want to mark invalid and valid fields, create in your CSS file following selectors:
+If you want to mark invalid and valid fields visually, use in your CSS file following selectors:
 * `.invalid-input`
 * `.valid-input`
+* `.button[disabled]`
+* `.button`
 
 #### TODO
 * More checkers
 * Unit tests
 * Documentation
 * Pretty argument parser
+* Tooltips
+* Your ideas?
+
+#### Contribution
+If you do have a contribution for the package feel free to put up a Pull Request or open Issue.
