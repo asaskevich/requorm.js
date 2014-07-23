@@ -2,7 +2,7 @@
 'use strict';
 
 function requorm() {
-    this.version = '0.0.2';
+    this.version = '0.0.3';
     this.checkers = [];
     this.addChecker = function (checkerName, func) {
         this.checkers[checkerName] = func;
