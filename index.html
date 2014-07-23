@@ -17,6 +17,9 @@
     <script src="requorm.js"></script>
   </head>
   <body>
+
+  <a class="hidden-xs" href="https://github.com/asaskevich/requorm.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
     <div class="wrapper">
       <header>
         <h1>Requorm.js</h1>
@@ -41,12 +44,14 @@
 <a name="content" class="anchor" href="#content"><span class="octicon octicon-link"></span></a>Content</h4>
 
 <ul>
-<li><a href="#Examples">Examples</a></li>
-<li><a href="#Usage">Usage</a></li>
-<li><a href="#Addition%20checkers_to_DOM_element">Addition checkers to DOM element</a></li>
-<li><a href="#Default_checkers">Default checkers</a></li>
-<li><a href="#Addition_own_checkers">Addition own checkers</a></li>
-<li><a href="#Using_CSS">Using CSS</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#install">Installation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#addition-checkers-to-dom-element">Addition checkers to DOM element</a></li>
+<li><a href="#default-checkers">Default checkers</a></li>
+<li><a href="#addition-own-checkers">Addition own checkers</a></li>
+<li><a href="#using-css">Using CSS</a></li>
+<li><a href="#contribution">Contribution</a></li>
 </ul><h4>
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h4>
 
@@ -128,7 +133,7 @@
 <input type="submit" class="button" value="Submit">
 </form>
 </p>
-<p>Type <code><b>Example</b> or <b>Excellent</b> or any string with prefix <b>Ex</b></code> in input field and any multiline text(but with five lines) in textarea and you will see green border on it! Also you will see enabled button!</p>
+<p>Here we use own checkers. Type <code><b>Example</b> or <b>Excellent</b> or any string with prefix <b>Ex</b></code> in input field and any multiline text(but with five lines) in textarea and you will see green border on it! Also you will see enabled button!</p>
 <p><code>Used checkers: <b>startWith(Ex); lineCount(5)</b></code></p>
 <p>
 <pre class="highlight highlight-html">
@@ -141,6 +146,16 @@ r.addChecker(<span class="s2">"lineCount"</span>, <span class="kd">function</spa
 </pre>
 </p>
 </div>
+
+<h4>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Installation</h4>
+<p>You can download library directly from GitHub by one of the links on your left.</p>
+<p>Alternatively, you can use <b>npm</b> or <b>bower</b>:</p>
+<div class="highlight highlight-html"><pre>
+$ npm install requorm.js
+or:
+$ bower install requorm.js
+</pre></div>
 
 <h4>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h4>
@@ -194,8 +209,8 @@ r.addChecker(<span class="s2">"lineCount"</span>, <span class="kd">function</spa
 
 <p>Checkers in attribute are separated by semicolon. If checker recieve any const arguments, you can point them like this:</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"minlenght(8); maxlength(32);"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"lenght(8, 32)"</span><span class="nt">&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"minLength(8); maxLength(32);"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"length(8, 32)"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"equal(abacaba)"</span><span class="nt">&gt;</span>
 </pre></div>
 
@@ -259,7 +274,13 @@ r.addChecker(<span class="s2">"lineCount"</span>, <span class="kd">function</spa
 <li>Tooltips</li>
 <li>Your ideas?</li>
 </ul>
-      </section>
+
+<h4>
+<a name="contribution" class="anchor" href="#contribution"><span class="octicon octicon-link"></span></a>Contribution</h4>
+
+<p>If you do have a contribution for the package feel free to put up a Pull Request or open Issue.</p>
+
+</section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/asaskevich">asaskevich</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
