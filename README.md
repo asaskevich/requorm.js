@@ -111,3 +111,5 @@ If you want to mark invalid and valid fields visually, use in your CSS file foll
 
 #### Contribution
 If you do have a contribution for the package feel free to put up a Pull Request or open Issue.
+
+[![NPM](https://nodei.co/npm/requorm.js.png?downloads=true)](https://nodei.co/npm/requorm.js/)

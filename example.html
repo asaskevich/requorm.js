@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Requorm.js by asaskevich</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+
+        body {
+            padding: 50px;
+            font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #777;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin: 0 0 20px;
+        }
+
+        p, ul, ol, table, pre, .code, dl {
+            margin: 0 0 20px;
+        }
+
+        h1, h2, h3 {
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #393939;
+        }
+
+        h3, h4, h5, h6 {
+            color: #494949;
+        }
+
+        code, pre, .code {
+            font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+            color: #333;
+            font-size: 12px;
+        }
+
+        pre, .code {
+            padding: 8px 15px;
+            background: #f8f8f8;
+            border-radius: 5px;
+            border: 1px solid #e5e5e5;
+            overflow-x: auto;
+        }
+
+        hr {
+            border: 0;
+            background: #e5e5e5;
+            height: 1px;
+            margin: 0 0 20px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="requorm.css">
+    <script src="requorm.js"></script>
+</head>
+<body>
+
+<!-- Example 1 -->
+<div class="code">
+    <p><b>Example 1: </b>Input should be not empty</p>
+
+    <p>
+
+    <form class="ex-1">
+        <input type="text" checkers="notEmpty">
+        <input type="submit" class="button" value="Submit">
+    </form>
+    </p>
+    <p>Type any text in input field and you will see green border on it! Also you will see enabled button!</p>
+
+    <p><code>Used checkers: <b>notEmpty</b></code></p>
+</div>
+
+<!-- Example 2 -->
+<div class="code">
+    <p><b>Example 2: </b>Input length should be between six and ten</p>
+
+    <p>
+
+    <form class="ex-2">
+        <input type="text" checkers="minLength(6);maxLength(10)">
+        <input type="submit" class="button" value="Submit">
+    </form>
+    </p>
+    <p>Type any text with length in range [6..10] and you will see green border on it! Also you will see enabled
+        button!</p>
+
+    <p><code>Used checkers: <b>minLength(6); maxLength(10)</b></code></p>
+</div>
+
+<!-- Example 3 -->
+<div class="code">
+    <p><b>Example 3: </b>Input should be alphabetic in one case and numeric in second</p>
+
+    <p>
+
+    <form class="ex-3">
+        <input type="text" checkers="alpha">
+        <input type="text" checkers="numeric">
+        <input type="submit" class="button" value="Submit">
+    </form>
+    </p>
+    <p>Type any letter in first field and any numeric character in second field and you will see green border on it!
+        Also you will see enabled button!</p>
+
+    <p><code>Used checkers: <b>alpha; numeric</b></code></p>
+</div>
+
+<!-- Example 4 -->
+<div class="code">
+    <p><b>Example 4: </b>Input should be valid e-mail with minimal length ten characters</p>
+
+    <p>
+
+    <form class="ex-4">
+        <input type="text" checkers="email;minLength(10)">
+        <input type="submit" class="button" value="Submit">
+    </form>
+    </p>
+    <p>Type <code><b>username@domain.com</b></code> and you will see green border on it! Also you will see enabled
+        button!</p>
+
+    <p><code>Used checkers: <b>email; minLength(10)</b></code></p>
+</div>
+
+<!-- Example 5 -->
+<div class="code">
+    <p><b>Example 5: </b>Input should be equal to "Hello"</p>
+
+    <p>
+
+    <form class="ex-5">
+        <input type="text" checkers="equal(Hello)">
+        <input type="submit" class="button" value="Submit">
+    </form>
+    </p>
+    <p>Type <code><b>Hello</b></code> and you will see green border on it! Also you will see enabled button!</p>
+
+    <p><code>Used checkers: <b>equal(Hello)</b></code></p>
+
+    <p><b>Spaces, the quotes are not yet supported!</b></p>
+</div>
+
+<!-- Example 6 -->
+<div class="code">
+    <p><b>Example 6: </b>Input should start with "Ex" in one case and has five lines in second<b>(Custom checkers)</b>
+    </p>
+
+    <p>
+
+    <form class="ex-6">
+        <input type="text" checkers="startWith(Ex)" style="width:100%"><br>
+        <textarea checkers="lineCount(5)" rows="6" style="width:100%"></textarea><br>
+        <input type="submit" class="button" value="Submit">
+    </form>
+    </p>
+    <p>Here we use own checkers. Type <code><b>Example</b> or <b>Excellent</b> or any string with prefix
+        <b>Ex</b></code> in input field and any multiline text(but with five lines) in textarea and you will see green
+        border on it! Also you will see enabled button!</p>
+
+    <p><code>Used checkers: <b>startWith(Ex); lineCount(5)</b></code></p>
+
+    <p>
+<pre>
+r.addChecker("startWith", function (element, args) {
+    return element.value.indexOf(args[0]) == 0
+})
+r.addChecker("lineCount", function (element, args) {
+    return element.value.split("\n").length == parseInt(args[0])
+})
+</pre>
+    </p>
+</div>
+
+<script src="javascripts/scale.fix.js"></script>
+<script type="text/javascript">
+    var r = new requorm();
+    r.initDefCheckers();
+    r.addChecker("startWith", function (element, args) {
+        return element.value.indexOf(args[0]) == 0
+    })
+    r.addChecker("lineCount", function (element, args) {
+        return element.value.split("\n").length == parseInt(args[0])
+    })
+    r.apply(".ex-1");
+    r.apply(".ex-2");
+    r.apply(".ex-3");
+    r.apply(".ex-4");
+    r.apply(".ex-5");
+    r.apply(".ex-6");
+</script>
+</body>
+</html>
