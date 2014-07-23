@@ -2,13 +2,28 @@
 'use strict';
 
 function requorm() {
-    this.version = '0.0.1';
+    this.version = '0.0.2';
     this.checkers = [];
     this.addChecker = function (checkerName, func) {
         this.checkers[checkerName] = func;
     };
     this.apply = function (form) {
         function callback() {
+            function hasClass(cls, ele) {
+                return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+            }
+
+            function addClass(cls, ele) {
+                if (!hasClass(cls, ele)) ele.className += " " + cls;
+            }
+
+            function removeClass(cls, ele) {
+                if (hasClass(cls, ele)) {
+                    var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+                    ele.className = ele.className.replace(reg, ' ');
+                }
+            }
+
             var enabled = true;
             for (var n = inputs.length; n--;) {
                 var checks = [];
@@ -31,16 +46,16 @@ function requorm() {
                         inCheckResult = inCheckResult && checkResult
                     }
                     if (inCheckResult) {
-                        inputs[n].classList.add('valid-input');
-                        inputs[n].classList.remove('invalid-input');
+                        addClass('valid-input', inputs[n]);
+                        removeClass('invalid-input', inputs[n]);
                     }
                     else {
-                        inputs[n].classList.add('invalid-input');
-                        inputs[n].classList.remove('valid-input');
+                        addClass('invalid-input', inputs[n]);
+                        removeClass('valid-input', inputs[n]);
                     }
 
                 }
-                else inputs[n].classList.add('valid-input');
+                else addClass('valid-input', inputs[n]);
             }
             for (var n = buttons.length; n--;)
                 buttons[n].disabled = !enabled;
