@@ -2,10 +2,19 @@
 'use strict';
 
 function requorm() {
-    this.version = '0.0.3';
+    this.version = '0.0.4';
     this.checkers = [];
+    this.tooltipMessages = [];
+    this.useTooltips = false;
+    this.setTooltip = function (checkerName, tooltip) {
+        this.tooltipMessages[checkerName] = tooltip;
+    };
     this.addChecker = function (checkerName, func) {
         this.checkers[checkerName] = func;
+        this.setTooltip(checkerName, checkerName);
+    };
+    this.setTooltipUsing = function (flag) {
+        this.useTooltips = flag;
     };
     this.apply = function (form) {
         function callback() {
@@ -30,7 +39,8 @@ function requorm() {
                 if (inputs[n].getAttribute("checkers") != null) {
                     checks = inputs[n].getAttribute("checkers").split(/[\s*;|\s*]/);
                     var inCheckResult = true,
-                        checkResult = true
+                        checkResult = true,
+                        tooltipMessage = "";
                     for (var m = checks.length; m--;) {
                         var checker = checks[m];
                         var leftBrake = checker.indexOf("(");
@@ -40,29 +50,45 @@ function requorm() {
                             args = checker.substr(leftBrake + 1, rightBrake - leftBrake - 1).split(/,\s*/);
                             checker = checker.substr(0, leftBrake);
                         }
-                        if (checkers[checker] != null)
-                            checkResult = checkers[checker](inputs[n], args)
+                        if (checkers[checker] != null) {
+                            checkResult = checkers[checker](inputs[n], args);
+                            if (!checkResult) tooltipMessage += " [" + tooltips[checker] + "]";
+                        }
                         enabled = enabled && checkResult
                         inCheckResult = inCheckResult && checkResult
                     }
                     if (inCheckResult) {
                         addClass('valid-input', inputs[n]);
                         removeClass('invalid-input', inputs[n]);
+                        if (useTooltips) {
+                            inputs[n].removeAttribute("rel");
+                            inputs[n].removeAttribute("data-original-title");
+                        }
                     }
                     else {
                         addClass('invalid-input', inputs[n]);
                         removeClass('valid-input', inputs[n]);
+                        if (useTooltips) {
+                            inputs[n].setAttribute("rel", "tooltip");
+                            inputs[n].setAttribute("data-original-title", tooltipMessage);
+                        }
                     }
-
                 }
                 else addClass('valid-input', inputs[n]);
             }
             for (var n = buttons.length; n--;)
                 buttons[n].disabled = !enabled;
+
+
+            if (useTooltips && (typeof($) == "function")) {
+                if (typeof($("[rel=tooltip]").tooltip) == "function") $("[rel=tooltip]").tooltip();
+            }
         }
 
         var forms = document.querySelectorAll(form),
             checkers = this.checkers,
+            tooltips = this.tooltipMessages,
+            useTooltips = this.useTooltips,
             inputs = [],
             buttons = [];
         for (var i = forms.length; i--;) {

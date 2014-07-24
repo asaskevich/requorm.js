@@ -11,6 +11,7 @@ JavaScript library for checking and validating HTML forms. If any of the fields 
 * [Default checkers](#default-checkers)
 * [Addition own checkers](#addition-own-checkers)
 * [Using CSS](#using-css)
+* [Using Tooltips](#using-tooltips)
 * [Contribution](#contribution)
 
 #### Examples
@@ -46,6 +47,9 @@ Init library, init default checkers and(or) add own checkers and apply to our fo
 <script>
     var r = new requorm()
     r.initDefCheckers()
+    // Here we can add own checkers
+    // Here we can add own tooltips
+    // After all we can call "apply" method
     r.apply(".myform")
 </script>
 ```
@@ -101,12 +105,48 @@ If you want to mark invalid and valid fields visually, use in your CSS file foll
 * `.button[disabled]`
 * `.button`
 
+#### Using Tooltips
+You can use tooltips for invalid fields. First of all, include all necessary jQuery and Bootstrap files. After it include plugin `Bootstrap Tooltips`. Tell the library that you want to use tooltips:
+```javascript
+var r = new requorm();
+...
+r.setTooltipUsing(true); // By default this flag set to false
+...
+r.apply(".myform");
+```
+**Note:** Call `setTooltipUsing` **always** before `apply`, otherwise there is no effect!
+You can include all necessary files by this snippet (I use it in my examples):
+```html
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+```
+By default tooltip message looks like:
+```
+[CheckerName 1 that throw error]
+[CheckerName 2 that throw error]
+...
+[CheckerName N that throw error]
+```
+You can make it looks better by using function `setTooltip (checkerName, tooltipMessage)`.
+**Note:** Call `setTooltip` **always** before `apply`, otherwise there is no effect!
+After execution this code:
+```javascript
+var r = new requorm();
+...
+r.setTooltipUsing(true); 
+r.setTooltip("email", "Value is not valid email!");
+...
+r.apply(".myform");
+```
+our tooltip for checker `email` will be look like `[Value is not valid email!]`.
+
 #### TODO
 * More checkers
 * Unit tests
 * Documentation
 * Pretty argument parser
-* Tooltips
 * Your ideas?
 
 #### Contribution
