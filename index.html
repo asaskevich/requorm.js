@@ -11,7 +11,10 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="requorm.css">
     <script src="requorm.js"></script>
@@ -38,7 +41,7 @@
         <h1>
 <a name="requormjs" class="anchor" href="#requormjs"><span class="octicon octicon-link"></span></a>requorm.js</h1>
 
-<p>JavaScript library for checking and validating HTML forms. If any of the fields in the form incorrectly filled, submit buttons will be disabled.</p>
+<p>JavaScript library for checking and validating HTML forms. If any of the fields in the form incorrectly filled, submit buttons will be disabled. <a href="http://badge.fury.io/js/requorm.js"><img src="https://badge.fury.io/js/requorm.js.svg" alt="NPM version" height="18"></a></p>
 
 <h4>
 <a name="content" class="anchor" href="#content"><span class="octicon octicon-link"></span></a>Content</h4>
@@ -51,8 +54,9 @@
 <li><a href="#default-checkers">Default checkers</a></li>
 <li><a href="#addition-own-checkers">Addition own checkers</a></li>
 <li><a href="#using-css">Using CSS</a></li>
+<li><a href="#using-tooltips">Using Tooltips</a></li>
 <li><a href="#contribution">Contribution</a></li>
-</ul><h4>
+</ul><br><h4>
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h4>
 
 <p>Let's watch some examples!</p>
@@ -125,11 +129,11 @@
 
 <!-- Example 6 -->
 <div class="code">
-<p><b>Example 6: </b>Input should start with "Ex" in one case and has five lines in second<b>(Custom checkers)</b></p>
+<p><b>Example 6: </b>Input should start with "Ex" in one case and has five lines in second<b>(Custom checkers and tooltips)</b></p>
 <p>
 <form class="ex-6">
 <input type="text" checkers="startWith(Ex)" style="width:100%"><br>
-<textarea checkers="lineCount(5)" rows="6" style="width:99%"></textarea><br>
+<textarea checkers="lineCount(5)" rows="6" style="width:100%"></textarea><br>
 <input type="submit" class="button" value="Submit">
 </form>
 </p>
@@ -137,16 +141,21 @@
 <p><code>Used checkers: <b>startWith(Ex); lineCount(5)</b></code></p>
 <p>
 <pre class="highlight highlight-html">
+<span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">requorm</span><span class="p">();</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">initDefCheckers</span><span class="p">()</span>;
 r.addChecker(<span class="s2">"startWith"</span>, <span class="kd">function</span>(element, args) {
- <span class="k">return</span> element.value.indexOf(args[<span class="mi">0</span>]) == <span class="mi">0</span>
-})
+ <span class="k">return</span> element.value.indexOf(args[<span class="mi">0</span>]) == <span class="mi">0</span>;
+});
 r.addChecker(<span class="s2">"lineCount"</span>, <span class="kd">function</span>(element, args) {
- <span class="k">return</span> element.value.split(<span class="s2">"\n"</span>).length == parseInt(args[<span class="mi">0</span>])
-})
+ <span class="k">return</span> element.value.split(<span class="s2">"\n"</span>).length == parseInt(args[<span class="mi">0</span>]);
+});
+r.setTooltipUsing(<span class="k">true</span>);
+r.setTooltip(<span class="s2">"lineCount"</span>, <span class="s2">"Illegal line count!"</span>);
+r.apply(<span class="s2">".ex-6"</span>);
 </pre>
 </p>
 </div>
-
+<br>
 <h4>
 <a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Installation</h4>
 <p>You can download library directly from GitHub by one of the links on your left.</p>
@@ -156,7 +165,7 @@ $ npm install requorm.js
 or:
 $ bower install requorm.js
 </pre></div>
-
+<br>
 <h4>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h4>
 
@@ -184,10 +193,13 @@ $ bower install requorm.js
 <div class="highlight highlight-html"><pre><span class="nt">&lt;script&gt;</span>
     <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">requorm</span><span class="p">()</span>
     <span class="nx">r</span><span class="p">.</span><span class="nx">initDefCheckers</span><span class="p">()</span>
+    <span class="c1">// Here we can add own checkers</span>
+    <span class="c1">// Here we can add own tooltips</span>
+    <span class="c1">// After all we can call "apply" method</span>
     <span class="nx">r</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="s2">".myform"</span><span class="p">)</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
-
+<br>
 <h4>
 <a name="addition-checkers-to-dom-element" class="anchor" href="#addition-checkers-to-dom-element"><span class="octicon octicon-link"></span></a>Addition checkers to DOM element</h4>
 
@@ -215,7 +227,7 @@ $ bower install requorm.js
 </pre></div>
 
 <p>Note, that list of arguments <code>10, 1.0f, true, abc abc</code> will be parsed as array of strings: <code>["10", "1.0f", "true", "abc abc"]</code></p>
-
+<br>
 <h4>
 <a name="default-checkers" class="anchor" href="#default-checkers"><span class="octicon octicon-link"></span></a>Default checkers</h4>
 
@@ -237,7 +249,9 @@ $ bower install requorm.js
 <strong>numeric</strong> - check, that field input has only numeric characters</li>
 <li>
 <strong>email</strong> - check, that field input has valid e-mail form</li>
-</ul><h4>
+</ul>
+<br>
+<h4>
 <a name="addition-own-checkers" class="anchor" href="#addition-own-checkers"><span class="octicon octicon-link"></span></a>Addition own checkers</h4>
 
 <p>For creating new checker, call <code>requorm.addChecker(name, func)</code>, where <code>name</code> is name of checker and <code>func</code> is function, that take DOM element and array of arguments and return <code>true|false</code>. Following code create new checker with name <code>equal</code>:</p>
@@ -252,7 +266,7 @@ $ bower install requorm.js
 
 <div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"equal(abacaba)"</span><span class="nt">&gt;</span>
 </pre></div>
-
+<br>
 <h4>
 <a name="using-css" class="anchor" href="#using-css"><span class="octicon octicon-link"></span></a>Using CSS</h4>
 
@@ -263,7 +277,54 @@ $ bower install requorm.js
 <li><code>.valid-input</code></li>
 <li><code>.button[disabled]</code></li>
 <li><code>.button</code></li>
-</ul><h4>
+</ul>
+<br>
+<h4>
+<a name="user-content-using-tooltips" class="anchor" href="#using-tooltips" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using Tooltips</h4>
+
+<p>You can use tooltips for invalid fields. First of all, include all necessary jQuery and Bootstrap files. After it include plugin <code>Bootstrap Tooltips</code>. Tell the library that you want to use tooltips:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">requorm</span><span class="p">();</span>
+<span class="p">...</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">setTooltipUsing</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> <span class="c1">// By default this flag set to false</span>
+<span class="p">...</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="s2">".myform"</span><span class="p">);</span>
+</pre></div>
+
+<p><strong>Note:</strong> Call <code>setTooltipUsing</code> <strong>always</strong> before <code>apply</code>, otherwise there is no effect!</p>
+
+<p>You can include all necessary files by this snippet (I use it in my examples):</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>By default tooltip message looks like:</p>
+
+<pre><code>[CheckerName 1 that throw error]
+[CheckerName 2 that throw error]
+...
+[CheckerName N that throw error]
+</code></pre>
+
+<p>You can make it looks better by using function <code>setTooltip (checkerName, tooltipMessage)</code>.</p>
+<p><strong>Note:</strong> Call <code>setTooltip</code> <strong>always</strong> before <code>apply</code>, otherwise there is no effect!</p>
+
+<p>After execution this code:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">requorm</span><span class="p">();</span>
+<span class="p">...</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">setTooltipUsing</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> 
+<span class="nx">r</span><span class="p">.</span><span class="nx">setTooltip</span><span class="p">(</span><span class="s2">"email"</span><span class="p">,</span> <span class="s2">"Value is not valid email!"</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="s2">".myform"</span><span class="p">);</span>
+</pre></div>
+
+<p>our tooltip for checker <code>email</code> will be look like <code>[Value is not valid email!]</code>.</p>
+<br>
+<h4>
 <a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h4>
 
 <ul>
@@ -271,10 +332,9 @@ $ bower install requorm.js
 <li>Unit tests</li>
 <li>Documentation</li>
 <li>Pretty argument parser</li>
-<li>Tooltips</li>
 <li>Your ideas?</li>
 </ul>
-
+<br>
 <h4>
 <a name="contribution" class="anchor" href="#contribution"><span class="octicon octicon-link"></span></a>Contribution</h4>
 
@@ -282,6 +342,7 @@ $ bower install requorm.js
 
 </section>
       <footer>
+      <p><a href="https://nodei.co/npm/requorm.js/"><img src="https://camo.githubusercontent.com/2d7c84473992078947e22e35ea834005fee0127a/68747470733a2f2f6e6f6465692e636f2f6e706d2f726571756f726d2e6a732e706e673f646f776e6c6f6164733d74727565" alt="NPM" data-canonical-src="https://nodei.co/npm/requorm.js.png?downloads=true" style="max-width:100%;"></a></p>
         <p>This project is maintained by <a href="https://github.com/asaskevich">asaskevich</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
@@ -301,6 +362,8 @@ $ bower install requorm.js
     r.apply(".ex-3");
     r.apply(".ex-4");
     r.apply(".ex-5");
+    r.setTooltipUsing(true);
+    r.setTooltip("lineCount", "Illegal line count!");
     r.apply(".ex-6");
     </script>
   </body>
