@@ -1,7 +1,7 @@
 requorm.js
 ==========
 
-JavaScript library for checking and validating HTML forms. If any of the fields in the form incorrectly filled, submit buttons will be disabled.
+JavaScript library for checking and validating HTML forms. If any of the fields in the form incorrectly filled, submit buttons will be disabled. [![NPM version](https://badge.fury.io/js/requorm.js.svg)](http://badge.fury.io/js/requorm.js)
 
 #### Content
 * [Examples](#examples)
