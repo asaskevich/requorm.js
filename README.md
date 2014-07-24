@@ -1,7 +1,7 @@
 requorm.js
 ==========
 
-JavaScript library for checking and validating HTML forms. If any of the fields in the form incorrectly filled, submit buttons will be disabled.
+JavaScript library for checking and validating HTML forms. If any of the fields in the form incorrectly filled, submit buttons will be disabled. [![NPM version](https://badge.fury.io/js/requorm.js.svg)](http://badge.fury.io/js/requorm.js)
 
 #### Content
 * [Examples](#examples)
@@ -115,6 +115,7 @@ r.setTooltipUsing(true); // By default this flag set to false
 r.apply(".myform");
 ```
 **Note:** Call `setTooltipUsing` **always** before `apply`, otherwise there is no effect!
+
 You can include all necessary files by this snippet (I use it in my examples):
 ```html
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -131,6 +132,7 @@ By default tooltip message looks like:
 ```
 You can make it looks better by using function `setTooltip (checkerName, tooltipMessage)`.
 **Note:** Call `setTooltip` **always** before `apply`, otherwise there is no effect!
+
 After execution this code:
 ```javascript
 var r = new requorm();
