@@ -2,7 +2,7 @@
 'use strict';
 
 function requorm() {
-    this.version = '0.0.4';
+    this.version = '0.0.5';
     this.checkers = [];
     this.tooltipMessages = [];
     this.useTooltips = false;
@@ -37,7 +37,7 @@ function requorm() {
             for (var n = inputs.length; n--;) {
                 var checks = [];
                 if (inputs[n].getAttribute("checkers") != null) {
-                    checks = inputs[n].getAttribute("checkers").split(/[\s*;|\s*]/);
+                    checks = inputs[n].getAttribute("checkers").split(/\s*;\s*/);
                     var inCheckResult = true,
                         checkResult = true,
                         tooltipMessage = "";
@@ -50,6 +50,7 @@ function requorm() {
                             args = checker.substr(leftBrake + 1, rightBrake - leftBrake - 1).split(/,\s*/);
                             checker = checker.substr(0, leftBrake);
                         }
+                        console.log(args, checker, checks)
                         if (checkers[checker] != null) {
                             checkResult = checkers[checker](inputs[n], args);
                             if (!checkResult) tooltipMessage += " [" + tooltips[checker] + "]";

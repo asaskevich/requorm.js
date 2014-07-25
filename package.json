@@ -1,6 +1,6 @@
 {
     "name": "requorm.js",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "JS library for validating required fields on HTML forms",
     "main": "requorm.js",
     "scripts": {
