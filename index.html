@@ -52,6 +52,7 @@
 <li><a href="#usage">Usage</a></li>
 <li><a href="#addition-checkers-to-dom-element">Addition checkers to DOM element</a></li>
 <li><a href="#default-checkers">Default checkers</a></li>
+<li><a href="#reg-exp">Regular Expressions</a></li>
 <li><a href="#addition-own-checkers">Addition own checkers</a></li>
 <li><a href="#using-css">Using CSS</a></li>
 <li><a href="#using-tooltips">Using Tooltips</a></li>
@@ -129,16 +130,17 @@
 
 <!-- Example 6 -->
 <div class="code">
-<p><b>Example 6: </b>Input should start with "Ex" in one case and has five lines in second<b>(Custom checkers and tooltips)</b></p>
-<p>
+<p><b>Example 6: </b>Input should start with "Ex" in one case, match to <b>^[a-zA-Z]*[0-9]+$</b> regexp in second and has five lines in third<b>(Custom checkers)</b>
+</p><p>
 <form class="ex-6">
 <input type="text" checkers="startWith(Ex)" style="width:100%"><br>
+<input type="text" checkers="/^[a-zA-Z]*[0-9]+$/" style="width: 100%;"><br>
 <textarea checkers="lineCount(5)" rows="6" style="width:100%"></textarea><br>
 <input type="submit" class="button" value="Submit">
 </form>
 </p>
 <p>Here we use own checkers. Type <code><b>Example</b> or <b>Excellent</b> or any string with prefix <b>Ex</b></code> in input field and any multiline text(but with five lines) in textarea and you will see green border on it! Also you will see enabled button!</p>
-<p><code>Used checkers: <b>startWith(Ex); lineCount(5)</b></code></p>
+<p><code>Used checkers: <b>startWith(Ex); lineCount(5); /^[a-zA-Z]*[0-9]+$/</b></code></p>
 <p>
 <pre class="highlight highlight-html">
 <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">requorm</span><span class="p">();</span>
@@ -250,6 +252,13 @@ $ bower install requorm.js
 <li>
 <strong>email</strong> - check, that field input has valid e-mail form</li>
 </ul>
+<br>
+<h4>
+<a name="reg-exp" class="anchor" href="#reg-exp"><span class="octicon octicon-link"></span></a>Regular expressions</h4>
+<p>Also you can use regular expressions instead checkers. Just put your regexp between slashes:</p>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"/^[a-zA-Z0-9]*$/"</span><span class="nt">&gt;</span>
+</pre></div>
+
 <br>
 <h4>
 <a name="addition-own-checkers" class="anchor" href="#addition-own-checkers"><span class="octicon octicon-link"></span></a>Addition own checkers</h4>
