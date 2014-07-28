@@ -134,17 +134,18 @@
 
 <!-- Example 6 -->
 <div class="code">
-    <p><b>Example 6: </b>Input should start with "Ex" in one case and has five lines in second<b>(Custom checkers)</b>
+    <p><b>Example 6: </b>Input should start with "Ex" in one case, match to <b>^[a-zA-Z]*[0-9]+$</b> regexp in second and has five lines in third<b>(Custom checkers)</b>
     </p>
 
     <form class="ex-6">
-        <input type="text" checkers="startWith(Ex)" style="width:100%"><br>
-        <textarea checkers="lineCount(5)" rows="6" style="width:100%"></textarea><br>
+        <input type="text" checkers="startWith(Ex)" style="width: 100%;"><br>
+        <input type="text" checkers="/^[a-zA-Z]*[0-9]+$/" style="width: 100%;"><br>
+        <textarea checkers="lineCount(5)" rows="6" style="width: 100%;"></textarea><br>
         <input type="submit" class="button" value="Submit">
     </form>
     <br>
 
-    <p><code>Used checkers: <b>startWith(Ex); lineCount(5)</b></code></p>
+    <p><code>Used checkers: <b>startWith(Ex); lineCount(5); /^[a-zA-Z]*[0-9]+$/</b></code></p>
 
     <p>
 <pre>

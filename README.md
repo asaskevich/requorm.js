@@ -9,6 +9,7 @@ JavaScript library for checking and validating HTML forms. If any of the fields 
 * [Usage](#usage)
 * [Addition checkers to DOM element](#addition-checkers-to-dom-element)
 * [Default checkers](#default-checkers)
+* [Regular Expressions](#regular-expressions)
 * [Addition own checkers](#addition-own-checkers)
 * [Using CSS](#using-css)
 * [Using Tooltips](#using-tooltips)
@@ -84,6 +85,12 @@ Note, that list of arguments `10, 1.0f, true, abc abc` will be parsed as array o
 - **alpha** - check, that field input has only alphabetic characters
 - **numeric** - check, that field input has only numeric characters
 - **email** - check, that field input has valid e-mail form
+
+#### Regular expressions
+Also you can use regular expressions instead checkers. Just put your regexp between slashes:
+````html
+<input type="text" checkers="/^[a-zA-Z0-9]*$/">
+````
 
 #### Addition own checkers
 For creating new checker, call `requorm.addChecker(name, func)`, where `name` is name of checker and `func` is function, that take DOM element and array of arguments and return `true|false`. Following code create new checker with name `equal`:

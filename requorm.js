@@ -2,7 +2,7 @@
 'use strict';
 
 function requorm() {
-    this.version = '0.0.5';
+    this.version = '0.0.6';
     this.checkers = [];
     this.tooltipMessages = [];
     this.useTooltips = false;
@@ -37,26 +37,34 @@ function requorm() {
             for (var n = inputs.length; n--;) {
                 var checks = [];
                 if (inputs[n].getAttribute("checkers") != null) {
+                    var checkrs = inputs[n].getAttribute("checkers");
                     checks = inputs[n].getAttribute("checkers").split(/\s*;\s*/);
                     var inCheckResult = true,
-                        checkResult = true,
                         tooltipMessage = "";
-                    for (var m = checks.length; m--;) {
-                        var checker = checks[m];
-                        var leftBrake = checker.indexOf("(");
-                        var rightBrake = checker.indexOf(")");
-                        var args = [];
-                        if (leftBrake != -1 && leftBrake < rightBrake) {
-                            args = checker.substr(leftBrake + 1, rightBrake - leftBrake - 1).split(/,\s*/);
-                            checker = checker.substr(0, leftBrake);
+                    if (checkrs.indexOf("/") == 0 && checkrs.lastIndexOf("/") == checkrs.length - 1) {
+                        var regexp = new RegExp(checkrs.substr(1, checkrs.length - 2));
+                        tooltipMessage = "RegExp " + checkrs.substr(1, checkrs.length - 2)
+                        inCheckResult = regexp.test(inputs[n].value);
+                        enabled = enabled && regexp.test(inputs[n].value);
+                    } else {
+                        for (var m = checks.length; m--;) {
+                            var checker = checks[m];
+                            var leftBrake = checker.indexOf("(");
+                            var rightBrake = checker.indexOf(")");
+                            var args = [];
+                            var checkResult = true;
+                            if (leftBrake != -1 && leftBrake < rightBrake) {
+                                args = checker.substr(leftBrake + 1, rightBrake - leftBrake - 1).split(/,\s*/);
+                                checker = checker.substr(0, leftBrake);
+                            }
+                            //console.log(args, checker, checks)
+                            if (checkers[checker] != null) {
+                                checkResult = checkers[checker](inputs[n], args);
+                                if (!checkResult) tooltipMessage += " [" + tooltips[checker] + "]";
+                            }
+                            enabled = enabled && checkResult
+                            inCheckResult = inCheckResult && checkResult
                         }
-                        console.log(args, checker, checks)
-                        if (checkers[checker] != null) {
-                            checkResult = checkers[checker](inputs[n], args);
-                            if (!checkResult) tooltipMessage += " [" + tooltips[checker] + "]";
-                        }
-                        enabled = enabled && checkResult
-                        inCheckResult = inCheckResult && checkResult
                     }
                     if (inCheckResult) {
                         addClass('valid-input', inputs[n]);
@@ -74,6 +82,7 @@ function requorm() {
                             inputs[n].setAttribute("data-original-title", tooltipMessage);
                         }
                     }
+
                 }
                 else addClass('valid-input', inputs[n]);
             }
