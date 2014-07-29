@@ -60,13 +60,14 @@
             margin: 0 0 20px;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="requorm.css">
-    <script src="requorm.js"></script>
+    <link rel="stylesheet" type="text/css" href="../requorm.css">
+    <script src="../requorm.js"></script>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
 
 </head>
 <body>
@@ -134,7 +135,8 @@
 
 <!-- Example 6 -->
 <div class="code">
-    <p><b>Example 6: </b>Input should start with "Ex" in one case, match to <b>^[a-zA-Z]*[0-9]+$</b> regexp in second and has five lines in third<b>(Custom checkers)</b>
+    <p><b>Example 6: </b>Input should start with "Ex" in one case, match to <b>^[a-zA-Z]*[0-9]+$</b> regexp in second
+        and has five lines in third<b>(Custom checkers)</b>
     </p>
 
     <form class="ex-6">
@@ -190,5 +192,10 @@ r.addChecker("lineCount", function (element, args) {
         r.apply(".ex-6");
     }
 </script>
+<!-- Unit Testing -->
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
+<script src="../tests/tests.js"></script>
 </body>
 </html>
