@@ -29,5 +29,18 @@
         "url": "https://github.com/asaskevich/requorm.js/issues"
     },
     "homepage": "https://github.com/asaskevich/requorm.js",
-    "categories": ["Utilities", "Validation"]
+    "categories": ["Utilities", "Validation"],
+    "family": "asaskevich",
+    "maintainers": [
+        "Alex Saskevich"
+    ],
+    "spm": {
+        "output": [
+            "requorm.js",
+            "requorm.css"
+        ],
+        "alias": {},
+        "devAlias": {},
+        "engines": {}
+    }
 }
