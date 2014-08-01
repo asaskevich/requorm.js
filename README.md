@@ -85,6 +85,8 @@ Note, that list of arguments `10, 1.0f, true, abc abc` will be parsed as array o
 - **alpha** - check, that field input has only alphabetic characters
 - **numeric** - check, that field input has only numeric characters
 - **email** - check, that field input has valid e-mail form
+- **len(min, max)** - check, that field input has length between `min` and `max`
+- **alphanum** - check, that field input has only alphabetic and numeric characters
 
 #### Regular expressions
 Also you can use regular expressions instead checkers. Just put your regexp between slashes:

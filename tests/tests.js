@@ -149,6 +149,8 @@ QUnit.test("Checkers", function (assert) {
     assert.ok(r.checkers["equal"] != null, "equal not null!");
     assert.ok(r.checkers["alpha"] != null, "alpha not null!");
     assert.ok(r.checkers["numeric"] != null, "numeric not null!");
+    assert.ok(r.checkers["alphanum"] != null, "alphanum not null!");
+    assert.ok(r.checkers["len"] != null, "len not null!");
     assert.ok(r.checkers["null_checker"] == null, "null_checker is null!");
 });
 
