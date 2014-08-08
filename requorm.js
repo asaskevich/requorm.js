@@ -2,8 +2,8 @@
 'use strict';
 
 function requorm() {
-    this.version = '0.0.8';
-    this.author ="Alex Saskevich";
+    this.version = '0.1.0';
+    this.author = "Alex Saskevich";
     this.checkers = [];
     this.tooltipMessages = [];
     this.useTooltips = false;
@@ -38,13 +38,13 @@ function requorm() {
             for (var n = inputs.length; n--;) {
                 var checks = [];
                 if (inputs[n].getAttribute("checkers") != null) {
-                    var checkrs = inputs[n].getAttribute("checkers");
+                    var allCheckers = inputs[n].getAttribute("checkers");
                     checks = inputs[n].getAttribute("checkers").split(/\s*;\s*/);
                     var inCheckResult = true,
                         tooltipMessage = "";
-                    if (checkrs.indexOf("/") == 0 && checkrs.lastIndexOf("/") == checkrs.length - 1) {
-                        var regexp = new RegExp(checkrs.substr(1, checkrs.length - 2));
-                        tooltipMessage = "RegExp " + checkrs.substr(1, checkrs.length - 2)
+                    if (allCheckers.indexOf("/") == 0 && allCheckers.lastIndexOf("/") == allCheckers.length - 1) {
+                        var regexp = new RegExp(allCheckers.substr(1, allCheckers.length - 2));
+                        tooltipMessage = "RegExp " + allCheckers.substr(1, allCheckers.length - 2)
                         inCheckResult = regexp.test(inputs[n].value);
                         enabled = enabled && regexp.test(inputs[n].value);
                     } else {
@@ -58,7 +58,6 @@ function requorm() {
                                 args = checker.substr(leftBrake + 1, rightBrake - leftBrake - 1).split(/,\s*/);
                                 checker = checker.substr(0, leftBrake);
                             }
-                            //console.log(args, checker, checks)
                             if (checkers[checker] != null) {
                                 checkResult = checkers[checker](inputs[n], args);
                                 if (!checkResult) tooltipMessage += " [" + tooltips[checker] + "]";
@@ -70,10 +69,8 @@ function requorm() {
                     if (inCheckResult) {
                         addClass('valid-input', inputs[n]);
                         removeClass('invalid-input', inputs[n]);
-                        if (useTooltips) {
-                            inputs[n].removeAttribute("rel");
-                            inputs[n].removeAttribute("data-original-title");
-                        }
+                        inputs[n].removeAttribute("rel");
+                        inputs[n].removeAttribute("data-original-title");
                     }
                     else {
                         addClass('invalid-input', inputs[n]);

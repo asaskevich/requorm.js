@@ -1,6 +1,6 @@
 {
     "name": "requorm.js",
-    "version": "0.0.8",
+    "version": "0.1.0",
     "description": "JS library for validating required fields on HTML forms",
     "main": "requorm.js",
     "scripts": {
@@ -29,18 +29,5 @@
         "url": "https://github.com/asaskevich/requorm.js/issues"
     },
     "homepage": "https://github.com/asaskevich/requorm.js",
-    "categories": ["Utilities", "Validation"],
-    "family": "asaskevich",
-    "maintainers": [
-        "Alex Saskevich"
-    ],
-    "spm": {
-        "output": [
-            "requorm.js",
-            "requorm.css"
-        ],
-        "alias": {},
-        "devAlias": {},
-        "engines": {}
-    }
+    "categories": ["Utilities", "Validation"]
 }
