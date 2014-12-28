@@ -228,7 +228,9 @@ $ bower install requorm.js
 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">checkers=</span><span class="s">"equal(abacaba)"</span><span class="nt">&gt;</span>
 </pre></div>
 
-<p>Note, that list of arguments <code>10, 1.0f, true, abc abc</code> will be parsed as array of strings: <code>["10", "1.0f", "true", "abc abc"]</code></p>
+<p>Note, that list of arguments <code>10, 1.0f, true, abc abc</code> will be parsed as array of strings: <code>["10", "1.0f", "true", "abc abc"]</code>
+You can change used attribute by passing new attribute value to constructor:</p>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> r <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">requorm</span>(<span class="pl-s1"><span class="pl-pds">'</span>same-attribute<span class="pl-pds">'</span></span>);</pre></div>
 <br>
 <h4>
 <a name="default-checkers" class="anchor" href="#default-checkers"><span class="octicon octicon-link"></span></a>Default checkers</h4>
@@ -287,6 +289,8 @@ $ bower install requorm.js
 <li><code>.button[disabled]</code></li>
 <li><code>.button</code></li>
 </ul>
+<p>You can change <code>.invalid-input .valid-input</code> to your CSS classes:</p>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> r <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">requorm</span>(<span class="pl-s1"><span class="pl-pds">'</span>checkers<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>validField<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>invalidField<span class="pl-pds">'</span></span>);</pre></div>
 <br>
 <h4>
 <a name="user-content-using-tooltips" class="anchor" href="#using-tooltips" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using Tooltips</h4>
