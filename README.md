@@ -76,6 +76,10 @@ Checkers in attribute are separated by semicolon. If checker recieve any const a
 <input type="text" checkers="equal(abacaba)">
 ```
 Note, that list of arguments `10, 1.0f, true, abc abc` will be parsed as array of strings: `["10", "1.0f", "true", "abc abc"]`
+You can change used attribute by passing new attribute value to constructor:
+```js
+var r = new requorm('same-attribute');
+```
 
 #### Default checkers
 - **notEmpty** - check, that field has any input
@@ -113,6 +117,10 @@ If you want to mark invalid and valid fields visually, use in your CSS file foll
 * `.valid-input`
 * `.button[disabled]`
 * `.button`
+You can change `.invalid-input .valid-input` to your CSS classes:
+```js
+var r = new requorm('checkers', 'validField', 'invalidField');
+```
 
 #### Using Tooltips
 You can use tooltips for invalid fields. First of all, include all necessary jQuery and Bootstrap files. After it include plugin `Bootstrap Tooltips`. Tell the library that you want to use tooltips:
